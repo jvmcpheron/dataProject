@@ -7,8 +7,8 @@
 
 using namespace std;
 
-
-void create()
+//function to create data and put it into the data.csv file
+void createData()
 {
 	// file pointer
 	fstream fout;
@@ -39,6 +39,22 @@ void create()
 
 int main (){
 
-create();
+string keepGoing = "done";
+string tempAnswer = "ahhhh";
+
+do {
+
+cout << "What would you like to do with the data? (create, done)" << endl;
+cin >> tempAnswer;
+if (tempAnswer == "done" || tempAnswer == "create"){
+    keepGoing = tempAnswer;
+    if (keepGoing == "create"){
+        createData();
+    }
+} else{
+    cout << "Try again.";
+}
+
+} while (keepGoing != "done");
 
 }
