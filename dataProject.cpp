@@ -7,6 +7,13 @@
 
 using namespace std;
 
+class MyData {       // The class
+  public:             // Access specifier
+    int myNum;        // Attribute (int variable)
+    string myName; 
+    string myFood;
+};
+
 //function to create data and put it into the data.csv file
 void createData()
 {
@@ -15,6 +22,12 @@ void createData()
 
 	// opens an existing csv file or creates a new file.
 	fout.open("data.csv", ios::out | ios::app);
+
+    int numOfInputs;
+
+    cout << "How many people's data would you like to add to the file?";
+    cin >> numOfInputs;
+
 
 	cout << "Enter their id number, name and favorite food:"
 		<< " number name food" << endl;
@@ -25,7 +38,7 @@ void createData()
 	string name;
 
 	// Read the input
-	for (i = 0; i < 3; i++) {
+	for (i = 0; i < numOfInputs; i++) {
 
 		cin >> number
             >> name
@@ -44,6 +57,7 @@ void readData(){
     ifstream myFile;
     myFile.open("data.csv");
 
+
     while (myFile.good()){
         string line;
         getline(myFile, line, ',');
@@ -53,6 +67,46 @@ void readData(){
 
 }
 
+void findData(){
+
+    //declaring vector
+
+
+    vector<MyData> foodData;
+
+
+    //open data
+    ifstream myFile;
+    myFile.open("data.csv");
+
+    string line = "";
+
+
+    while (getline(myFile, line)){
+        int number;
+        string name;
+        string food;
+        string tempString;
+
+        stringstream inputString(line);
+
+        getline(inputString, tempString, ',');
+        number = atoi(tempString.c_str());
+        getline(inputString, name, ',');
+        getline(inputString, food, ',');
+
+        MyData dataEntry;
+        dataEntry.myNum = number;
+        dataEntry.myName = name;
+        dataEntry.myFood = food;
+
+        //appending object to list
+        foodData.push_back(dataEntry);
+
+
+    }
+}
+
 int main (){
 
 string keepGoing = "done";
@@ -60,7 +114,7 @@ string tempAnswer = "ahhhh";
 
 do {
 
-cout << "What would you like to do with the data? (create, done, read)" << endl;
+cout << "What would you like to do with the data? (create, read, done)" << endl;
 cin >> tempAnswer;
 if (tempAnswer == "done" || tempAnswer == "create" || tempAnswer == "read"){
     keepGoing = tempAnswer;
