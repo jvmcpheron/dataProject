@@ -81,13 +81,17 @@ void findData(){
 
     string line = "";
 
-
+    //grabbing and parsing data
     while (getline(myFile, line)){
+
+        //data variables
         int number;
         string name;
         string food;
         string tempString;
 
+
+        //putting data into variables
         stringstream inputString(line);
 
         getline(inputString, tempString, ',');
@@ -95,6 +99,7 @@ void findData(){
         getline(inputString, name, ',');
         getline(inputString, food, ',');
 
+        //putting variables into object
         MyData dataEntry;
         dataEntry.myNum = number;
         dataEntry.myName = name;
@@ -107,16 +112,14 @@ void findData(){
     }
 
     int searchNum = 0;
-    bool isFound = false;
 
-
+    //getting id number to look for in data
     cout << "What is the ID number of the data entry you are looking for?";
     cin >> searchNum;
 
-
+    //searching for and outputting info from object
     for (int i = 0; i < foodData.size(); i++){
         if (foodData[i].myNum == searchNum){
-            isFound = true;
             cout << "ID Number: " << searchNum <<endl;
             cout << "Name: " << foodData[i].myName << endl;
             cout << "Favorite Food: " << foodData[i].myFood << endl;
