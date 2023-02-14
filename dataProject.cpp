@@ -7,9 +7,10 @@
 
 using namespace std;
 
-class MyData {       // The class
+//class for defining data entry objects
+class MyData {       
   public:             // Access specifier
-    int myNum;        // Attribute (int variable)
+    int myNum;        
     string myName; 
     string myFood;
 };
@@ -191,8 +192,11 @@ string tempAnswer = "ahhhh";
 
 do {
 
+//grabbing user input about what they want to do with data
 cout << "What would you like to do with the data? (create, read, find, sort, done)" << endl;
 cin >> tempAnswer;
+
+//checking user input
 if (tempAnswer == "done" || tempAnswer == "create" || tempAnswer == "read" || tempAnswer == "find" || tempAnswer == "sort"){
     keepGoing = tempAnswer;
     if (keepGoing == "create"){
@@ -208,6 +212,7 @@ if (tempAnswer == "done" || tempAnswer == "create" || tempAnswer == "read" || te
     cout << "Try again.";
 }
 
+//conditon for loop
 } while (keepGoing != "done");
 
 
