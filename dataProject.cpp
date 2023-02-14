@@ -14,6 +14,11 @@ class MyData {       // The class
     string myFood;
 };
 
+//function for comparing objects id num value
+bool compareNum(const MyData& a, const MyData& b) {
+    return a.myNum < b.myNum;
+}
+
 //function to create data and put it into the data.csv file
 void createData()
 {
@@ -128,6 +133,57 @@ void findData(){
     }
 }
 
+void sortData(){
+
+    vector<MyData> foodData;
+
+
+    //open data
+    ifstream myFile;
+    myFile.open("data.csv");
+
+    string line = "";
+
+    //grabbing and parsing data
+    while (getline(myFile, line)){
+
+        //data variables
+        int number;
+        string name;
+        string food;
+        string tempString;
+
+
+        //putting data into variables
+        stringstream inputString(line);
+
+        getline(inputString, tempString, ',');
+        number = atoi(tempString.c_str());
+        getline(inputString, name, ',');
+        getline(inputString, food, ',');
+
+        //putting variables into object
+        MyData dataEntry;
+        dataEntry.myNum = number;
+        dataEntry.myName = name;
+        dataEntry.myFood = food;
+
+        //appending object to list
+        foodData.push_back(dataEntry);
+
+
+    }
+
+    sort(foodData.begin(), foodData.end(), compareNum);
+
+    for (int i = 0; i < foodData.size(); i++){
+        cout << foodData[i].myNum << " " 
+        << foodData[i].myName << " " << foodData[i].myFood << endl;
+
+    }
+
+}
+
 int main (){
 
 string keepGoing = "done";
@@ -135,9 +191,9 @@ string tempAnswer = "ahhhh";
 
 do {
 
-cout << "What would you like to do with the data? (create, read, find, done)" << endl;
+cout << "What would you like to do with the data? (create, read, find, sort, done)" << endl;
 cin >> tempAnswer;
-if (tempAnswer == "done" || tempAnswer == "create" || tempAnswer == "read" || tempAnswer == "find"){
+if (tempAnswer == "done" || tempAnswer == "create" || tempAnswer == "read" || tempAnswer == "find" || tempAnswer == "sort"){
     keepGoing = tempAnswer;
     if (keepGoing == "create"){
         createData();
@@ -145,6 +201,8 @@ if (tempAnswer == "done" || tempAnswer == "create" || tempAnswer == "read" || te
         readData();
     }else if (keepGoing == "find"){
         findData();
+    }else if (keepGoing == "sort"){
+        sortData();
     }
 } else{
     cout << "Try again.";
