@@ -106,9 +106,22 @@ void findData(){
 
     }
 
+    int searchNum = 0;
+    bool isFound = false;
+
+
+    cout << "What is the ID number of the data entry you are looking for?";
+    cin >> searchNum;
+
+
     for (int i = 0; i < foodData.size(); i++){
-        cout << foodData[i].myNum << " " << foodData[i].myName << " " << foodData[i].myFood
-        << " " << endl;
+        if (foodData[i].myNum == searchNum){
+            isFound = true;
+            cout << "ID Number: " << searchNum <<endl;
+            cout << "Name: " << foodData[i].myName << endl;
+            cout << "Favorite Food: " << foodData[i].myFood << endl;
+            break;
+        } 
     }
 }
 
