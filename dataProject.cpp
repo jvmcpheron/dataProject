@@ -105,6 +105,11 @@ void findData(){
 
 
     }
+
+    for (int i = 0; i < foodData.size(); i++){
+        cout << foodData[i].myNum << " " << foodData[i].myName << " " << foodData[i].myFood
+        << " " << endl;
+    }
 }
 
 int main (){
@@ -114,14 +119,16 @@ string tempAnswer = "ahhhh";
 
 do {
 
-cout << "What would you like to do with the data? (create, read, done)" << endl;
+cout << "What would you like to do with the data? (create, read, find, done)" << endl;
 cin >> tempAnswer;
-if (tempAnswer == "done" || tempAnswer == "create" || tempAnswer == "read"){
+if (tempAnswer == "done" || tempAnswer == "create" || tempAnswer == "read" || tempAnswer == "find"){
     keepGoing = tempAnswer;
     if (keepGoing == "create"){
         createData();
     }else if (keepGoing == "read"){
         readData();
+    }else if (keepGoing == "find"){
+        findData();
     }
 } else{
     cout << "Try again.";
